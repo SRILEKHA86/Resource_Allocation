@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-pro">
+  <div class="page-header">
+    <h2 class="page-title">{{ action }} Resource</h2>
+  </div>
+  <form method="post" class="mt-2">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.resource_name.label(class='form-label') }}
+      {{ form.resource_name(class='form-control', placeholder='e.g., Room A') }}
+      {% for e in form.resource_name.errors %}<div class="text-danger">{{ e }}</div>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {{ form.resource_type.label(class='form-label') }}
+      {{ form.resource_type(class='form-control', placeholder='room, instructor, equipment') }}
+      {% for e in form.resource_type.errors %}<div class="text-danger">{{ e }}</div>{% endfor %}
+    </div>
+    {{ form.submit(class='btn btn-primary') }}
+    <a href="/resources" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>
+{% endblock %}

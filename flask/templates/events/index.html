@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-pro">
+  <div class="page-header">
+    <h2 class="page-title">Events</h2>
+    <a class="btn btn-primary" href="/events/new">Add Event</a>
+  </div>
+  <table class="table table-modern table-hover align-middle">
+    <thead><tr><th>Title</th><th>Start</th><th>End</th><th>Resources</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for e in events %}
+        <tr>
+          <td>{{ e.title }}</td>
+          <td>{{ e.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td>{{ e.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td>
+            {% for a in e.allocations %}
+              <span class="badge bg-secondary">{{ a.resource.resource_name }} ({{ a.resource.resource_type }})</span>
+            {% endfor %}
+          </td>
+          <td><a class="btn btn-sm btn-outline-secondary" href="/events/{{ e.event_id }}/edit">Edit</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-pro">
+  <div class="page-header">
+    <h2 class="page-title">Resources</h2>
+    <a class="btn btn-primary" href="/resources/new">Add Resource</a>
+  </div>
+  <table class="table table-modern table-hover align-middle">
+    <thead><tr><th>Name</th><th>Type</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for r in resources %}
+        <tr>
+          <td>{{ r.resource_name }}</td>
+          <td>{{ r.resource_type }}</td>
+          <td><a class="btn btn-sm btn-outline-secondary" href="/resources/{{ r.resource_id }}/edit">Edit</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

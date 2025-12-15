@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-pro">
+  <div class="page-header">
+    <h2 class="page-title">Allocate Resources to Event</h2>
+  </div>
+  <form method="post" class="mt-2">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.event_id.label(class='form-label') }}
+      {{ form.event_id(class='form-select') }}
+    </div>
+    <div class="mb-3">
+      {{ form.resources.label(class='form-label') }}
+      {{ form.resources(class='form-select', multiple=true) }}
+    </div>
+    {{ form.submit(class='btn btn-primary') }}
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-pro">
+  <div class="page-header">
+    <h2 class="page-title">Resource Utilisation Report</h2>
+  </div>
+  <form method="post" class="mt-2">
+    {{ form.hidden_tag() }}
+    <div class="row g-3">
+      <div class="col-md-4">
+        {{ form.range_start.label(class='form-label') }}
+        {{ form.range_start(class='form-control', placeholder='YYYY-MM-DD HH:MM') }}
+        {% for e in form.range_start.errors %}<div class="text-danger">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="col-md-4">
+        {{ form.range_end.label(class='form-label') }}
+        {{ form.range_end(class='form-control', placeholder='YYYY-MM-DD HH:MM') }}
+        {% for e in form.range_end.errors %}<div class="text-danger">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="col-md-4 align-self-end">
+        {{ form.submit(class='btn btn-primary') }}
+      </div>
+    </div>
+  </form>
+
+  {% if results is not none %}
+  <table class="table table-modern table-hover align-middle mt-4">
+    <thead><tr><th>Resource</th><th>Total Hours</th><th>Upcoming Bookings</th></tr></thead>
+    <tbody>
+      {% for row in results %}
+        <tr>
+          <td>{{ row.resource.resource_name }} ({{ row.resource.resource_type }})</td>
+          <td>{{ row.total_hours }}</td>
+          <td>
+            {% for e in row.upcoming %}
+              <div>{{ e.title }} — {{ e.start_time.strftime('%Y-%m-%d %H:%M') }} → {{ e.end_time.strftime('%H:%M') }}</div>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}
